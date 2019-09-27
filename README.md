@@ -14,6 +14,11 @@ For the browser you can test for example:
 
 ```http://localhost:3043/?tex=\frac{n!}{k!(n-k)!}````
 
+## Use our webservice to include formula in github
+
+```<img src="https://tex.cheminfo.org/?tex=\frac{n!}{k!(n-k)!}>```
+  
+<img src="https://tex.cheminfo.org/?tex=\frac{n!}{k!(n-k)!}">
 
 ## License
 

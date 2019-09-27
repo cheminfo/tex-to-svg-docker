@@ -1,0 +1,7 @@
+version: '2.2'
+services:
+  tex-to-svg:
+    build: ./docker
+    restart: always
+    ports:
+      - 127.0.0.1:3043:80

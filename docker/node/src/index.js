@@ -3,6 +3,7 @@
 const mathJax = require('mathjax-node');
 const http = require('http');
 const URL = require('url');
+const sharp = require('sharp');
 
 mathJax.start();
 
@@ -23,9 +24,17 @@ const server = http.createServer(async function (request, response) {
       svg: true, // or svg:true, or html:true
     })
   ).svg;
-  response.setHeader('content-type', 'image/svg+xml');
-  response.write(svg);
-  response.end();
+  if (query.format !== 'png') {
+    response.setHeader('content-type', 'image/svg+xml');
+    response.write(svg);
+    response.end();
+  } else {
+    const encoder = new TextEncoder('utf8');
+    const png = await sharp(encoder.encode(svg)).png().toBuffer();
+    response.setHeader('content-type', 'image/png');
+    response.write(png);
+    response.end();
+  }
 });
 server.timeout = 2000;
 

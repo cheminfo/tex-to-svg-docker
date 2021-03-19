@@ -30,7 +30,12 @@ const server = http.createServer(async function (request, response) {
     response.end();
   } else {
     const encoder = new TextEncoder('utf8');
-    const png = await sharp(encoder.encode(svg)).png().toBuffer();
+    let svgBlob = encoder.encode(svg);
+    const png = await sharp(svgBlob, {
+      density: query.resolution ? Number(query.resolution) : 300,
+    })
+      .png()
+      .toBuffer();
     response.setHeader('content-type', 'image/png');
     response.write(png);
     response.end();

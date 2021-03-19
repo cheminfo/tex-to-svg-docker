@@ -12,8 +12,7 @@ const server = http.createServer(async function (request, response) {
   const query = URL.parse(request.url, true).query;
   if (!query.tex) {
     response.writeHead(302, {
-      Location:
-        'https://www.cheminfo.org/?viewURL=https%3A%2F%2Fcouch.cheminfo.org%2Fcheminfo-public%2F12c971bb3f9d5f93dfbf82f27e089d35%2Fview.json&loadversion=true&fillsearch=Convert+tex+latex+for+github',
+      Location: 'https://www.cheminfo.org/flavor/tools/TexToImg/index.html',
     });
     response.end();
     return;

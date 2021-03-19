@@ -1,8 +1,9 @@
 'use strict';
 
-const mathJax = require('mathjax-node');
 const http = require('http');
 const URL = require('url');
+
+const mathJax = require('mathjax-node');
 const sharp = require('sharp');
 
 mathJax.start();

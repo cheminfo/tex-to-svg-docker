@@ -22,6 +22,7 @@ const server = http.createServer(async function (request, response) {
       math: query.tex,
       format: 'TeX', // or "inline-TeX", "MathML"
       svg: true, // or svg:true, or html:true
+      cssStyles: {},
     })
   ).svg;
   if (query.format !== 'png') {

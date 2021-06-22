@@ -10,6 +10,9 @@ mathJax.start();
 
 const server = http.createServer(async function (request, response) {
   const query = URL.parse(request.url, true).query;
+  if (query.backgroundColor === undefined) {
+    query.backgroundColor = 'white';
+  }
   if (!query.tex) {
     response.writeHead(302, {
       Location: 'https://www.cheminfo.org/flavor/tools/TexToImg/index.html',
@@ -22,9 +25,14 @@ const server = http.createServer(async function (request, response) {
       math: query.tex,
       format: 'TeX', // or "inline-TeX", "MathML"
       svg: true, // or svg:true, or html:true
-      cssStyles: {},
     })
   ).svg;
+  if (query.backgroundColor) {
+    svg = svg.replace(
+      'style="',
+      `style="stroke-width: 0px; background-color: ${query.backgroundColor}; `,
+    );
+  }
   if (query.format !== 'png') {
     response.setHeader('content-type', 'image/svg+xml');
     response.write(svg);
